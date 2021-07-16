@@ -2,6 +2,7 @@
   (:require [clojure.string :as s]))
 
 (def filename "suspects.csv")
+(def new-filename "new-suspects.csv")
 (def vamp-keys [:name :glitter-index])
 
 (defn str->int [str]
@@ -32,3 +33,20 @@
 (defn glitter-filter
   [minimum-glitter records]
   (filter #(>= (:glitter-index %) minimum-glitter) records))
+
+;; Exercises
+;; 1
+(defn gfilter-list
+  [minimum-glitter records]
+  (map :name (filter #(>= (:glitter-index %) minimum-glitter) records)))
+
+;; 2
+(defn append [suspect records]
+  (conj records suspect))
+
+;; 3
+
+
+;; 4
+(defn convert-csv [maps]
+  (s/join "\r\n" (map #(s/join "," [(:name %) (:glitter-index %)]) maps)))
